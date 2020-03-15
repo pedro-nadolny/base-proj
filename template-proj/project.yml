@@ -1,0 +1,144 @@
+name: template-proj 
+minimumXcodeGenVersion: "2.13.1"
+
+options:
+  createIntermediateGroups: true 
+  indentWidth: 4
+  tabWidth: 4
+  bundleIdPrefix: "template.proj"
+
+targets:
+  template-proj:
+    type: application
+    platform: iOS
+    dependencies: 
+     - target: Home
+    templates: [AppTemp]
+
+  template-proj Stubbed:
+    type: application
+    platform: iOS
+    dependencies: 
+     - target: Home
+    templates: [AppTemp]
+
+  Core:
+    type: framework
+    platform: iOS
+    dependencies: 
+     - carthage: RxSwift
+    templates: [SharedTemp]
+
+  Dependencies:
+    type: framework
+    platform: iOS
+    templates: [SharedTemp]
+
+  Domain:
+    type: framework
+    platform: iOS
+    templates: [SharedTemp]
+
+  Repository:
+    type: framework
+    platform: iOS
+    templates: [SharedTemp]
+    dependencies: 
+      - target: Domain
+      - carthage: Moya 
+      - carthage: RxSwift
+      - carthage: RxSwiftExt
+
+  Components: 
+    type: framework
+    platform: iOS
+    templates: [SharedTemp]
+    dependencies: 
+      - target: Core
+      - carthage: SnapKit
+
+  RxComponents: 
+    type: framework
+    platform: iOS
+    templates: [SharedTemp]
+    dependencies: 
+      - target: Components
+      - carthage: RxSwift
+
+  RxExtensions:
+    type: framework
+    platform: iOS
+    templates: [SharedTemp]
+    dependencies:
+      - target: Components
+      - carthage: RxSwift
+
+  Home:
+    type: framework
+    platform: iOS
+    templates: [FeatureTemp]
+
+  Details:
+     type: framework
+     platform: iOS
+     templates: [FeatureTemp]
+
+targetTemplates:
+  DeploymentTarget:
+    deploymentTarget: "11.4" 
+
+  AppTemp:
+    sources: "${target_name}"
+    dependencies: 
+      - target: Core
+      - target: Repository
+      - target: Components
+      - target: RxComponents
+      - target: RxExtensions
+      - target: Domain
+      - target: Dependencies
+      - carthage: Alamofire
+      - carthage: Kingfisher
+      - carthage: KingfisherSwiftUI
+      - carthage: Lottie
+      - carthage: Moya
+      - carthage: ReactiveMoya
+      - carthage: ReactiveSwift
+      - carthage: Result
+      - carthage: Rswift
+      - carthage: RxCocoa
+      - carthage: RxMoya
+      - carthage: RxRelay
+      - carthage: RxSwift
+      - carthage: RxSwiftExt
+      - carthage: SnapKit
+    templates: [DeploymentTarget]
+          
+  SharedTemp: 
+    sources: "Shared Modules/${target_name}"
+    templates: [DeploymentTarget]
+
+  FeatureTemp: 
+    sources:
+      - path: "Feature Modules/${target_name}"
+    dependencies: 
+      - target: Core  
+      - target: Dependencies 
+      - target: Components
+      - target: RxComponents
+      - target: RxExtensions
+      - target: Repository
+      - target: Domain
+      - carthage: RxSwift 
+      - carthage: RxSwiftExt 
+      - carthage: SnapKit 
+      - carthage: Kingfisher 
+      - carthage: Rswift
+    preBuildScripts: 
+      - script: "\"$SRCROOT/External Dependencies/Rswift/rswift\" generate \"$SRCROOT/Feature Modules/${target_name}/Resources/R.generated.swift\""
+        name: "R.swift"
+        inputFiles: 
+          - "$TEMP_DIR/rswift-lastrun"
+        outputFiles: 
+          - "$SRCROOT/Feature Modules/${target_name}/Resources/R.generated.swift"
+    templates: [DeploymentTarget]

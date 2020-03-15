@@ -1,0 +1,19 @@
+//
+//  RxComponents.h
+//  RxComponents
+//
+//  Created by Pedro Nadolny on 01/03/20.
+//  Copyright © 2020 template. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+//! Project version number for RxComponents.
+FOUNDATION_EXPORT double RxComponentsVersionNumber;
+
+//! Project version string for RxComponents.
+FOUNDATION_EXPORT const unsigned char RxComponentsVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <RxComponents/PublicHeader.h>
+
+
