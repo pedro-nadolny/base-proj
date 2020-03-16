@@ -1,24 +1,24 @@
-name: Beacons 
+name: base-proj 
 minimumXcodeGenVersion: "2.13.1"
 
 options:
   createIntermediateGroups: true 
   indentWidth: 4
   tabWidth: 4
-  bundleIdPrefix: "template.proj"
+  bundleIdPrefix: "base.proj"
 
 targets:
-  Beacons:
+  base-proj:
     type: application
     platform: iOS
     dependencies: 
      - target: Home
     templates: [AppTemp]
 
-  Beacons Stubbed:
+  base-proj Stubbed:
     type: application
     platform: iOS
-    sources: "Beacons"
+    sources: "base-proj"
     dependencies: 
      - target: Home
     templates: [AppTemp]
