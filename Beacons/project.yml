@@ -1,4 +1,4 @@
-name: template-proj 
+name: Beacons 
 minimumXcodeGenVersion: "2.13.1"
 
 options:
@@ -8,16 +8,17 @@ options:
   bundleIdPrefix: "template.proj"
 
 targets:
-  template-proj:
+  Beacons:
     type: application
     platform: iOS
     dependencies: 
      - target: Home
     templates: [AppTemp]
 
-  template-proj Stubbed:
+  Beacons Stubbed:
     type: application
     platform: iOS
+    sources: "Beacons"
     dependencies: 
      - target: Home
     templates: [AppTemp]
